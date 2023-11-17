@@ -43,5 +43,13 @@ class MainActivity : AppCompatActivity() {
         Log.i("info", "In onStop")
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Toast.makeText(this, "In onDestroy", Toast.LENGTH_SHORT).show()
+
+        Log.i("info", "In onDestroy")
+    }
+
 
 }
