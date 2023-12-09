@@ -8,7 +8,7 @@ import android.widget.Toast
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.homepagesplash)
+        setContentView(R.layout.welcomepage)
     }
 
     override fun onStart(){
