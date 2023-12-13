@@ -92,9 +92,7 @@
                 android:layout_height="wrap_content"
                 tools:itemCount="10"
                 tools:listitem="@layout/recyclerview_layout" />
-
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
 >>>>>>> 86d87fa (few changes with file names but layout still same)
