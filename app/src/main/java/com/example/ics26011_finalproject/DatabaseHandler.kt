@@ -57,25 +57,23 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 + KEY_PASS + " TEXT NOT NULL)")
 
         val CREATE_RECIPE_TABLE = ("CREATE TABLE " + TABLE_RECIPE + "("
-                + KEY_RID + " INTEGER PRIMARY KEY NOT NULL,"
-                + KEY_RNAME + " TEXT PRIMARY KEY NOT NULL,"
+                + KEY_RID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_RNAME + " TEXT NOT NULL,"
                 + KEY_ISLAND + " TEXT NOT NULL,"
                 + KEY_SERVING_SIZE + " TEXT NOT NULL,"
                 + KEY_CALORIES  + " REAL NOT NULL,"
                 + KEY_TIME  + " TEXT NOT NULL,"
-                + KEY_INSTRUCTIONS + " TEXT NOT NULL)")
+                + KEY_INSTRUCTIONS + " TEXT NOT NULL);")
 
         val CREATE_INGREDIENT_TABLE = ("CREATE TABLE " + TABLE_INGREDIENTS + "("
-                + KEY_IID + "INTEGER PRIMARY KEY NOT NULL,"
-                + KEY_INAME + "TEXT NOT NULL,"
-                + "recipeID INTEGER, FOREIGN KEY(recipeID) REFERENCES "
-                + TABLE_RECIPE + "(" + KEY_RID + ")")
+                + KEY_IID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_INAME + " TEXT NOT NULL,"
+                + " FOREIGN KEY ($KEY_IID) REFERENCES $TABLE_RECIPE($KEY_RID));")
 
-        val CREATE_MEASUREMENT_TABLE = ("CREATE TABLE " + TABLE_MEASUREMENTS + "("
-                + KEY_MID + "INTEGEr PRIMARY KEY NOT NULL,"
-                + KEY_MNAME + "TEXT NOT NULL,"
-                + "ingredientID INTEGER, FOREIGN KEY(ingredientID) REFERENCES "
-                + TABLE_INGREDIENTS + "(" + KEY_IID + ")")
+        val CREATE_MEASUREMENT_TABLE = ("CREATE TABLE $TABLE_MEASUREMENTS"
+                + "($KEY_MID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "$KEY_MNAME TEXT NOT NULL,"
+                + "FOREIGN KEY($KEY_MID) REFERENCES $TABLE_INGREDIENTS($KEY_IID));")
 
 
         db?.execSQL(CREATE_USER_TABLE)
@@ -187,17 +185,17 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return empList
     }
 
-    fun loadRecipes(emp: EmpModelClass): Long{
+    fun loadRecipes(): Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_EMAIL, emp.userEmail)
-        contentValues.put(KEY_FNAME, emp.userFirstName)
-        contentValues.put(KEY_LNAME, emp.userLastName)
-        contentValues.put(KEY_USER, emp.userUser)
-        contentValues.put(KEY_PASS, emp.userPass)
+        contentValues.put(KEY_RNAME, "Pork Sisig")
+        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_SERVING_SIZE, "6 persons")
+        contentValues.put(KEY_CALORIES, 933)
+        contentValues.put(KEY_TIME, "1 hour, 42 minutes")
+        contentValues.put(KEY_INSTRUCTIONS, "1 hour, 42 minutes")
 
-        val success = db.insert(TABLE_USER,null,contentValues)
-
+        val success = db.insert(TABLE_RECIPE,null,contentValues)
         db.close()
 
         return success
