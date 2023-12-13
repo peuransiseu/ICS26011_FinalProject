@@ -21,8 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".Welcome" />
+        <activity android:name=".Login"
+            android:exported="true"/>
+
+        <activity android:name=".Welcome"
+            android:exported="false"/>
+
+        <activity android:name=".Register"
+            android:exported="false"/>
+
+        <activity android:name=".Luzon"
+            android:exported="false"/>
+
+        <activity android:name=".Visayas"
+            android:exported="false"/>
+
+        <activity android:name=".Mindanao"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

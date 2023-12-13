@@ -1,6 +1,7 @@
 package com.example.ics26011_finalproject
 
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -52,6 +53,8 @@ class Register : AppCompatActivity() {
                     val status =  databaseHandler.addUser(EmpModelClass(email,fname,lname,user,pass))
                     if(status > -1){
                         Toast.makeText(this,"Record Saved", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     }
                 }
 

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/regloginbg"
     android:gravity="center"
+    android:onClick="login"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -92,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:onClick="loginUser"
+                android:onClick="login"
                 android:text="Login" />
 
             <LinearLayout
@@ -120,7 +121,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="toRegisterActivity"
                     android:text="Register Here"
                     android:textColor="#2196F3"
                     android:textStyle="bold|italic" />
