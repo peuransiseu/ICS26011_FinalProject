@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/regloginbg"
@@ -48,28 +49,44 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/luzonCard"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_cornersbg"
             android:clickable="true"
-            android:foreground="@drawable/cardstrokeeffect"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="10dp">
+            android:foreground="@drawable/cardstrokeeffect">
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
                 android:alpha="1.0"
-                android:background="@drawable/luzonpic"
-                android:fontFamily="@font/annie_use_your_telescope"
-                android:gravity="center"
+                android:fontFamily="@font/passion_one"
                 android:text="LUZON"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:textSize="34sp"
                 android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="369dp"
+                android:layout_height="191dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="-82dp"
+                android:layout_marginBottom="-50dp"
+                android:src="@drawable/mayonpic" />
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/visayasCard"
