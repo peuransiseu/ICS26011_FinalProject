@@ -12,9 +12,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
-
+            
             <ImageView
-                android:id="@+id/backBtn3"
+                android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/arrow_back"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/annie_use_your_telescope"
                 android:gravity="center"
-                android:text="Welcome to Mindanao!"
+                android:text="Welcome to Luzon!"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                 android:iconifiedByDefault="false"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
+                android:id="@+id/luzonList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="10"
