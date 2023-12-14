@@ -7,8 +7,5 @@
     <color name="mustard">#C89C5A</color>
     <color name="light_mustard">#E4BA7B</color>
     <color name="pale">#EACBAA</color>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
+    <color name="light_brown">#BB7D3C</color>
 </resources>
