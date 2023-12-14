@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainbg">
@@ -16,36 +17,14 @@
             <ImageView
                 android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="600dp"
                 android:src="@drawable/arrow_back"
                 android:clickable="true"
                 android:padding="15dp"
                 android:layout_centerVertical="true"/>
-
-            <ImageButton
-                android:id="@+id/like_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/liked_icon"
-                android:background="#EBE9E5"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="70dp"
-                android:layout_alignParentRight="true"/>
-
-            <ImageButton
-                android:id="@+id/basket_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/basket_icon"
-                android:background="#EBE9E5"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="25dp"
-                android:layout_alignParentRight="true"/>
-
         </RelativeLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -70,13 +49,15 @@
                 android:queryHint="Search Here..."
                 android:iconifiedByDefault="false"/>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ListView
                 android:id="@+id/luzonList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:dividerHeight="10.0sp"
                 tools:itemCount="10"
-                tools:listitem="@layout/recyclerview_layout" />
+                tools:listitem="@layout/listview_layout" />
 
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

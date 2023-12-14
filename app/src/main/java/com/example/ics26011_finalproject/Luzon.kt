@@ -2,6 +2,9 @@ package com.example.ics26011_finalproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ListView
 import com.example.montesmp5.DatabaseHandler
 
@@ -9,22 +12,25 @@ class Luzon : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.luzonpage)
-//
-//        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-//        val emp: List<RecipeModel> = databaseHandler.viewEmployee()
-//        val empArrayId = Array<String>(emp.size){"0"}
-//        val empArrayName = Array<String>(emp.size){"null"}
-//        val empArrayEmail = Array<String>(emp.size){"null"}
-//        var index = 0
-//        for(e in emp){
-//            empArrayId[index] = e.userId.toString()
-//            empArrayName[index] = e.userName
-//            empArrayEmail[index] = e.userEmail
-//            index++
-//
-//        }
-//        val listview = findViewById<ListView>(R.id.listView)
-//        val myListAdapter = MyListAdapter(this, empArrayId, empArrayName, empArrayEmail)
-//        listview.adapter = myListAdapter
+
+
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        val rm: List<RecipeModel> = databaseHandler.getRecipes("Luzon")
+        val rmRecName = Array<String>(rm.size){"null"}
+        var index = 0
+        for(e in rm){
+            rmRecName[index] = e.recName
+            index++
+
+        }
+        val listview = findViewById<ListView>(R.id.luzonList)
+        val myListAdapter = MyListAdapter(this, rmRecName)
+        listview.adapter = myListAdapter
+
+        val back = findViewById<ImageView>(R.id.backBtn)
+        back.setOnClickListener {
+            this.finish()
+        }
     }
+
 }
