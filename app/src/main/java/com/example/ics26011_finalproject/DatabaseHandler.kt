@@ -9,6 +9,7 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.ics26011_finalproject.RecipeModel
 import java.io.BufferedReader
 import java.io.FileReader
 
@@ -140,9 +141,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
 
     @SuppressLint("Range")
-    fun getRecipes():List<EmpModelClass>{
-        val empList:ArrayList<EmpModelClass> = ArrayList<EmpModelClass>()
-        val selectQuery = "SELECT * FROM $TABLE_USER"
+    fun getRecipes(isla:String):List<RecipeModel>{
+        val empList:ArrayList<RecipeModel> = ArrayList<RecipeModel>()
+        val selectQuery = "SELECT * FROM $TABLE_RECIPE WHERE $KEY_ISLAND = \"$isla\""
         val db = this.readableDatabase
         var cursor:Cursor? = null
 
@@ -154,20 +155,22 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             return ArrayList()
         }
 
-        var uEmail: String
-        var uFirstName: String
-        var uLastName: String
-        var uUser: String
-        var uPass: String
+        var name: String
+        var island: String
+        var serve: String
+        var cal: Int
+        var time: String
+        var ins: String
 
         if(cursor.moveToFirst()){
             do{//assign values from first row
-                uEmail = cursor.getString(cursor.getColumnIndex(KEY_EMAIL))
-                uFirstName = cursor.getString(cursor.getColumnIndex(KEY_FNAME))
-                uLastName = cursor.getString(cursor.getColumnIndex(KEY_LNAME))
-                uUser = cursor.getString(cursor.getColumnIndex(KEY_USER))
-                uPass = cursor.getString(cursor.getColumnIndex(KEY_PASS))
-                val emp = EmpModelClass(userEmail = uEmail, userFirstName = uFirstName, userLastName = uLastName, userUser = uUser, userPass = uPass)
+                name = cursor.getString(cursor.getColumnIndex(KEY_EMAIL))
+                island = cursor.getString(cursor.getColumnIndex(KEY_FNAME))
+                serve = cursor.getString(cursor.getColumnIndex(KEY_LNAME))
+                cal = cursor.getInt(cursor.getColumnIndex(KEY_USER))
+                time = cursor.getString(cursor.getColumnIndex(KEY_PASS))
+                ins = cursor.getString(cursor.getColumnIndex(KEY_PASS))
+                val emp = RecipeModel(recName = name, recIsland = island, recServeSize = serve, recCalories = cal, recTime = time, recInstructions = ins)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
