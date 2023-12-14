@@ -63,7 +63,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 + KEY_INSTRUCTIONS + " TEXT NOT NULL);")
 
         val CREATE_INGREDIENT_TABLE = ("CREATE TABLE " + TABLE_INGREDIENTS + "("
-                + KEY_IID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_IID + " INTEGER,"
                 + KEY_INAME + " TEXT NOT NULL,"
                 + KEY_IMEASURE + " TEXT NOT NULL,"
                 + " FOREIGN KEY ($KEY_IID) REFERENCES $TABLE_RECIPE($KEY_RID));")
@@ -79,7 +79,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_USER)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS)
-        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_MEASUREMENTS)
         onCreate(db)
     }
 
@@ -179,68 +178,111 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     fun loadRecipes(): Long{
-
         val db = this.writableDatabase
-        val buffer = BufferedReader(FileReader("filePath"))
-        var line: String?
-        db.beginTransaction()
-        while (buffer.readLine().also { line = it } != null) {
-            val str = line!!.split(",".toRegex(), 3).toTypedArray()
-            val contentValues = ContentValues()
-            contentValues.put(KEY_RNAME, str[0])
-            contentValues.put(KEY_ISLAND, str[1])
-            contentValues.put(KEY_SERVING_SIZE, str[2])
-            contentValues.put(KEY_CALORIES, str[2])
-            contentValues.put(KEY_TIME, str[2])
-            contentValues.put(KEY_INSTRUCTIONS, str[2])
-            db.insert(TABLE_RECIPE, null, contentValues)
+        var contentValues = ContentValues()
+        contentValues.put(KEY_RNAME, "Pork Sisig")
+        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_SERVING_SIZE, "6 persons")
+        contentValues.put(KEY_CALORIES, 933)
+        contentValues.put(KEY_TIME, "1 hour, 42 minutes")
+        contentValues.put(KEY_INSTRUCTIONS, "Pour the water in a pan and bring to a boil Add salt and pepper.\n" +
+                "Put-in the pig’s ears and pork belly then simmer for 40 minutes to 1 hour (or until tender).\n" +
+                "Remove the boiled ingredients from the pot then drain excess water\n" +
+                "Grill the boiled pig ears and pork belly until done\n" +
+                "Chop the pig ears and pork belly into fine pieces\n" +
+                "In a wide pan, melt the butter or margarine. Add the onions. Cook until onions are soft.\n" +
+                "Put-in the ginger and cook for 2 minutes\n" +
+                "Add the chicken liver. Crush the chicken liver while cooking it in the pan.\n" +
+                "Add the chopped pig ears and pork belly. Cook for 10 to 12 minutes\n" +
+                "Put-in the soy sauce, garlic powder, and chili. Mix well\n" +
+                "Add salt and pepper to taste\n" +
+                "Put-in the mayonnaise and mix with the other ingredients\n" +
+                "Transfer to a serving plate. Top with chopped green onions and raw egg.\n" +
+                "Serve hot. Share and Enjoy (add the lemon or calamansi before eating)\n"
+                )
+
+         var success = db.insert(TABLE_RECIPE,null,contentValues)
+
+        contentValues = ContentValues()
+        var ingredients = listOf("Pig ears", "Pork Belly", "Onion", "Soy Sauce", "Ground Black Pepper", "Ginger", "Chiliflakes", "Garlic Powder", "Calamansi","Butter", "Chicken Liver","Water","Mayonnaise",
+                "Salt", "Egg")
+        var measurements = listOf("1 lb.", "1 1/2 lb.", "3 tbsp.", "1/4 tsp.", "1 knob", "3 tbsp.", "1/2 tsp.", "3-5 pcs.", "1/2 cup",
+            "1/4 lb.", "6 cups", "3 tbsp.", "1/2 tsp.","1")
+
+        (ingredients.zip(measurements)).forEach() {
+                (ingredients,measurements) ->
+            contentValues.put(KEY_IID, 1)
+            contentValues.put(KEY_INAME, ingredients)
+            contentValues.put(KEY_IMEASURE, measurements)
+            success  = db.insert(TABLE_INGREDIENTS,null,contentValues)
         }
-        db.setTransactionSuccessful()
-        db.endTransaction()
 
+        //**************************************************************************//
 
+        contentValues = ContentValues()
+        contentValues.put(KEY_RNAME, "Kare Kare")
+        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_SERVING_SIZE, "6 persons")
+        contentValues.put(KEY_CALORIES, 934)
+        contentValues.put(KEY_TIME, "2 hours, 40 minutes")
+        contentValues.put(KEY_INSTRUCTIONS, "In a large pot, bring the water to a boil\n" +
+                "Put in the oxtail followed by the onions and simmer for 2.5 to 3 hrs or until tender (35 minutes if using a pressure cooker)\n" +
+                "Once the meat is tender, add the ground peanuts, peanut butter, and coloring (water from the annatto seed mixture) and simmer for 5 to 7 minutes\n" +
+                "Add the toasted ground rice and simmer for 5 minutes\n" +
+                "On a separate pan, saute the garlic then add the banana flower, eggplant, and string beans and cook for 5 minutes\n" +
+                "Transfer the cooked vegetables to the large pot (where the rest of the ingredients are)\n" +
+                "Add salt and pepper to taste\n" +
+                "Serve hot with shrimp paste. Enjoy!"
+        )
 
+        success = db.insert(TABLE_RECIPE,null,contentValues)
 
-//        val db = this.writableDatabase
-//        val contentValues = ContentValues()
-//        contentValues.put(KEY_RNAME, "Pork Sisig")
-//        contentValues.put(KEY_ISLAND, "Luzon")
-//        contentValues.put(KEY_SERVING_SIZE, "6 persons")
-//        contentValues.put(KEY_CALORIES, 933)
-//        contentValues.put(KEY_TIME, "1 hour, 42 minutes")
-//        contentValues.put(KEY_INSTRUCTIONS, "Pour the water in a pan and bring to a boil Add salt and pepper.\n" +
-//                "Put-in the pig’s ears and pork belly then simmer for 40 minutes to 1 hour (or until tender).\n" +
-//                "Remove the boiled ingredients from the pot then drain excess water\n" +
-//                "Grill the boiled pig ears and pork belly until done\n" +
-//                "Chop the pig ears and pork belly into fine pieces\n" +
-//                "In a wide pan, melt the butter or margarine. Add the onions. Cook until onions are soft.\n" +
-//                "Put-in the ginger and cook for 2 minutes\n" +
-//                "Add the chicken liver. Crush the chicken liver while cooking it in the pan.\n" +
-//                "Add the chopped pig ears and pork belly. Cook for 10 to 12 minutes\n" +
-//                "Put-in the soy sauce, garlic powder, and chili. Mix well\n" +
-//                "Add salt and pepper to taste\n" +
-//                "Put-in the mayonnaise and mix with the other ingredients\n" +
-//                "Transfer to a serving plate. Top with chopped green onions and raw egg.\n" +
-//                "Serve hot. Share and Enjoy (add the lemon or calamansi before eating)\n"
-//                )
-//
-//        val success = db.insert(TABLE_RECIPE,null,contentValues)
-//
-//        val contentValues1 = ContentValues()
-//        val ingredients = listOf("Pig ears", "Pork Belly", "Onion", "Soy Sauce", "Ground Black Pepper", "Ginger", "Chiliflakes", "Garlic Powder", "Calamansi","Butter", "Chicken Liver","Water","Mayonnaise",
-//                "Salt", "Egg")
-//        val measurements = listOf("", "Cabbage", "Bok Choy", "Corn Cob", "Peppercorn", "Green Onions", "Onion", "Water", "Fish Sauce")
-//
-//
-//        for (item in ingredients) {
-//            contentValues1.put(KEY_INAME, item)
-//            contentValues1.put(KEY_IMEASURE, item)
-//            val success1 = db.insert(TABLE_INGREDIENTS,null,contentValues1)
-//        }
-//
-//        db.close()
-//
-       return true
+        contentValues = ContentValues()
+        ingredients = listOf("Oxtail", "Banana FLower Bud", "Bok Choy or Pechay", "String Beans", "Eggplants", "Ground Peanuts", "Peanute Butter", "Shrimp Paste", "Water","Annatto Seeds", "Toasted Ground Rice","Garlic","Onion",
+            "Salt", "Pepper")
+        measurements = listOf("3 lb.", "1 pc.", "1 bundle", "4 pcs.", "1 cup", "1/2 cup ", "1/2 cup", "1 Liter", "1/2 cup",
+            "1/2 cup", "1 tbsp.", "1 pc.", "1/2 tsp.","1 tbsp")
+
+        (ingredients.zip(measurements)).forEach() {
+                (ingredients,measurements) ->
+            contentValues.put(KEY_IID, 2)
+            contentValues.put(KEY_INAME, ingredients)
+            contentValues.put(KEY_IMEASURE, measurements)
+            success  = db.insert(TABLE_INGREDIENTS,null,contentValues)
+        }
+
+        //**************************************************************************//
+
+        contentValues = ContentValues()
+        contentValues.put(KEY_RNAME, "Bulalo")
+        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_SERVING_SIZE, "4 persons")
+        contentValues.put(KEY_CALORIES, 231)
+        contentValues.put(KEY_TIME, "2 hours")
+        contentValues.put(KEY_INSTRUCTIONS, "In a big cooking pot, pour in water and bring to a boil\n" +
+                "Put-in the beef shank followed by the onion and whole pepper corn then simmer for 1.5 hours (30 mins if using a pressure cooker) or until meat is tender.\n" +
+                "Add the corn and simmer for another 10 minutes\n" +
+                "Add the fish sauce,cabbage, pechay, and green onion (onion leeks)\n" +
+                "Serve hot. Share and Enjoy!"
+        )
+
+        success = db.insert(TABLE_RECIPE,null,contentValues)
+
+        contentValues = ContentValues()
+        ingredients = listOf("Beef Shank", "Cabbage", "Bok Choy", "Corn Cob", "Whole Peppercorn", "Green Onion", "Onion", "Water","Fish Sauce")
+        measurements = listOf("2 lb.", "1/2 pc.", "1 bundle", "2 pcs.", "2 tbsp.", "1/2 cup ", "1 pc.", "34 ounces", "To taste (optional)")
+
+        (ingredients.zip(measurements)).forEach() {
+                (ingredients,measurements) ->
+            contentValues.put(KEY_IID, 3)
+            contentValues.put(KEY_INAME, ingredients)
+            contentValues.put(KEY_IMEASURE, measurements)
+            success  = db.insert(TABLE_INGREDIENTS,null,contentValues)
+        }
+
+        db.close()
+
+       return success
     }
 
 
