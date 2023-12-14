@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/regloginbg">
+    android:background="@drawable/mainbg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +13,37 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/backBtn3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/arrow_back"
+                android:background="#EBE9E5"
                 android:clickable="true"
                 android:padding="15dp"
                 android:layout_centerVertical="true"/>
+
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/liked_icon"
+                android:background="#EBE9E5"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="70dp"
+                android:layout_alignParentRight="true"/>
+
+            <ImageButton
+                android:id="@+id/basket_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/basket_icon"
+                android:background="#EBE9E5"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="25dp"
+                android:layout_alignParentRight="true"/>
+
+
         </RelativeLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

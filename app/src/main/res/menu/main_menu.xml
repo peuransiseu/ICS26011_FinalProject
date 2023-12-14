@@ -14,13 +14,13 @@
                     android:icon="@drawable/profile_icon"
                     android:title="Your Profile" />
                 <item
-                    android:id="@+id/nav_your_recipes"
-                    android:icon="@drawable/food_icon"
-                    android:title="Liked Recipes" />
+                    android:id="@+id/nav_liked_recipes"
+                    android:icon="@drawable/basket_icon"
+                    android:title="Your Favorites" />
                 <item
-                    android:id="@+id/nav_logout"
-                    android:icon="@drawable/logout_icon"
-                    android:title="Logout" />
+                    android:id="@+id/nav_own_recipes"
+                    android:icon="@drawable/food_icon"
+                    android:title="Your Own Recipes" />
             </group>
         </menu>
     </item>
@@ -36,4 +36,16 @@
                 android:title="Rate Us" />
         </menu>
     </item>
+
+    <item android:title="Want to go?">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout_icon"
+                android:title="Log out" />
+        </menu>
+    </item>
+
+
+
 </menu>
