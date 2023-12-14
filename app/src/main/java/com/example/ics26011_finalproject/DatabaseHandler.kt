@@ -9,8 +9,12 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+<<<<<<< Updated upstream
 import java.io.BufferedReader
 import java.io.FileReader
+=======
+import java.io.InputStream
+>>>>>>> Stashed changes
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object{
@@ -177,7 +181,23 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return empList
     }
 
+<<<<<<< Updated upstream
     fun loadRecipes(): Long{
+=======
+    fun loadRecipes(emp: EmpModelClass): Long{
+        fun readCsv(inputStream: InputStream): Boolean{
+            val reader = inputStream.bufferedReader()
+            val header = reader.readLine()
+            return reader.lineSequence()
+                .filter { it.isNotBlank() }
+                .map {
+                    val (year, rating, title) = it.split(',', ignoreCase = false, limit = 3)
+                    Movie(Year.of(year.trim().toInt()), rating.trim().toInt(), title.trim().removeSurrounding("\""))
+                }.toList()
+        }
+        val movies = readCsv(/*Open a stream to CSV file*/)
+
+>>>>>>> Stashed changes
         val db = this.writableDatabase
         var contentValues = ContentValues()
         contentValues.put(KEY_RNAME, "Pork Sisig")
