@@ -25,7 +25,8 @@
         android:background="#EBE9E5"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/hamburger_icon"/>
+        app:navigationIcon="@drawable/hamburger_icon"
+        app:title="Pamana Plates"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
