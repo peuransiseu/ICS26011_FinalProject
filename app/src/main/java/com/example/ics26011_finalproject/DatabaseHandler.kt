@@ -9,6 +9,8 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import java.io.BufferedReader
+import java.io.FileReader
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
     companion object{
@@ -37,12 +39,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private val TABLE_INGREDIENTS = "IngredientTable"
         private val KEY_IID = "iId"
         private val KEY_INAME = "iname"
-
-        //Table for Measurements
-        private val TABLE_MEASUREMENTS = "MeasurementTable"
-        private val KEY_MID = "mId"
-        private val KEY_MNAME = "mname"
-
+        private val KEY_IMEASURE = "imeasure"
 
     }
 
@@ -68,18 +65,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         val CREATE_INGREDIENT_TABLE = ("CREATE TABLE " + TABLE_INGREDIENTS + "("
                 + KEY_IID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_INAME + " TEXT NOT NULL,"
+                + KEY_IMEASURE + " TEXT NOT NULL,"
                 + " FOREIGN KEY ($KEY_IID) REFERENCES $TABLE_RECIPE($KEY_RID));")
-
-        val CREATE_MEASUREMENT_TABLE = ("CREATE TABLE $TABLE_MEASUREMENTS"
-                + "($KEY_MID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "$KEY_MNAME TEXT NOT NULL,"
-                + "FOREIGN KEY($KEY_MID) REFERENCES $TABLE_INGREDIENTS($KEY_IID));")
 
 
         db?.execSQL(CREATE_USER_TABLE)
         db?.execSQL(CREATE_RECIPE_TABLE)
         db?.execSQL(CREATE_INGREDIENT_TABLE)
-        db?.execSQL(CREATE_MEASUREMENT_TABLE)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -186,19 +179,68 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     fun loadRecipes(): Long{
+
         val db = this.writableDatabase
-        val contentValues = ContentValues()
-        contentValues.put(KEY_RNAME, "Pork Sisig")
-        contentValues.put(KEY_ISLAND, "Luzon")
-        contentValues.put(KEY_SERVING_SIZE, "6 persons")
-        contentValues.put(KEY_CALORIES, 933)
-        contentValues.put(KEY_TIME, "1 hour, 42 minutes")
-        contentValues.put(KEY_INSTRUCTIONS, "1 hour, 42 minutes")
+        val buffer = BufferedReader(FileReader("filePath"))
+        var line: String?
+        db.beginTransaction()
+        while (buffer.readLine().also { line = it } != null) {
+            val str = line!!.split(",".toRegex(), 3).toTypedArray()
+            val contentValues = ContentValues()
+            contentValues.put(KEY_RNAME, str[0])
+            contentValues.put(KEY_ISLAND, str[1])
+            contentValues.put(KEY_SERVING_SIZE, str[2])
+            contentValues.put(KEY_CALORIES, str[2])
+            contentValues.put(KEY_TIME, str[2])
+            contentValues.put(KEY_INSTRUCTIONS, str[2])
+            db.insert(TABLE_RECIPE, null, contentValues)
+        }
+        db.setTransactionSuccessful()
+        db.endTransaction()
 
-        val success = db.insert(TABLE_RECIPE,null,contentValues)
-        db.close()
 
-        return success
+
+
+//        val db = this.writableDatabase
+//        val contentValues = ContentValues()
+//        contentValues.put(KEY_RNAME, "Pork Sisig")
+//        contentValues.put(KEY_ISLAND, "Luzon")
+//        contentValues.put(KEY_SERVING_SIZE, "6 persons")
+//        contentValues.put(KEY_CALORIES, 933)
+//        contentValues.put(KEY_TIME, "1 hour, 42 minutes")
+//        contentValues.put(KEY_INSTRUCTIONS, "Pour the water in a pan and bring to a boil Add salt and pepper.\n" +
+//                "Put-in the pig’s ears and pork belly then simmer for 40 minutes to 1 hour (or until tender).\n" +
+//                "Remove the boiled ingredients from the pot then drain excess water\n" +
+//                "Grill the boiled pig ears and pork belly until done\n" +
+//                "Chop the pig ears and pork belly into fine pieces\n" +
+//                "In a wide pan, melt the butter or margarine. Add the onions. Cook until onions are soft.\n" +
+//                "Put-in the ginger and cook for 2 minutes\n" +
+//                "Add the chicken liver. Crush the chicken liver while cooking it in the pan.\n" +
+//                "Add the chopped pig ears and pork belly. Cook for 10 to 12 minutes\n" +
+//                "Put-in the soy sauce, garlic powder, and chili. Mix well\n" +
+//                "Add salt and pepper to taste\n" +
+//                "Put-in the mayonnaise and mix with the other ingredients\n" +
+//                "Transfer to a serving plate. Top with chopped green onions and raw egg.\n" +
+//                "Serve hot. Share and Enjoy (add the lemon or calamansi before eating)\n"
+//                )
+//
+//        val success = db.insert(TABLE_RECIPE,null,contentValues)
+//
+//        val contentValues1 = ContentValues()
+//        val ingredients = listOf("Pig ears", "Pork Belly", "Onion", "Soy Sauce", "Ground Black Pepper", "Ginger", "Chiliflakes", "Garlic Powder", "Calamansi","Butter", "Chicken Liver","Water","Mayonnaise",
+//                "Salt", "Egg")
+//        val measurements = listOf("", "Cabbage", "Bok Choy", "Corn Cob", "Peppercorn", "Green Onions", "Onion", "Water", "Fish Sauce")
+//
+//
+//        for (item in ingredients) {
+//            contentValues1.put(KEY_INAME, item)
+//            contentValues1.put(KEY_IMEASURE, item)
+//            val success1 = db.insert(TABLE_INGREDIENTS,null,contentValues1)
+//        }
+//
+//        db.close()
+//
+       return true
     }
 
 

@@ -13,21 +13,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.homepagesplash)
         val dbh = DatabaseHandler(this)
-
         dbh.loadRecipes()
-
-        val loginBtn = findViewById<Button>(R.id.login1)
-        val registerBtn = findViewById<Button>(R.id.createBtn)
-
-        loginBtn.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
-        }
-
-        registerBtn.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
+//
+//        val loginBtn = findViewById<Button>(R.id.login1)
+//        val registerBtn = findViewById<Button>(R.id.createBtn)
+//
+//        loginBtn.setOnClickListener {
+//            val intent = Intent(this, Login::class.java)
+//            startActivity(intent)
+//        }
+//
+//        registerBtn.setOnClickListener {
+//            val intent = Intent(this, Register::class.java)
+//            startActivity(intent)
+//        }
 
     }
 
