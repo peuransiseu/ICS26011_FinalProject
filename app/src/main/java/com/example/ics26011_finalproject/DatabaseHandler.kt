@@ -164,12 +164,12 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if(cursor.moveToFirst()){
             do{//assign values from first row
-                name = cursor.getString(cursor.getColumnIndex(KEY_EMAIL))
-                island = cursor.getString(cursor.getColumnIndex(KEY_FNAME))
-                serve = cursor.getString(cursor.getColumnIndex(KEY_LNAME))
-                cal = cursor.getInt(cursor.getColumnIndex(KEY_USER))
-                time = cursor.getString(cursor.getColumnIndex(KEY_PASS))
-                ins = cursor.getString(cursor.getColumnIndex(KEY_PASS))
+                name = cursor.getString(cursor.getColumnIndex(KEY_RNAME))
+                island = cursor.getString(cursor.getColumnIndex(KEY_ISLAND))
+                serve = cursor.getString(cursor.getColumnIndex(KEY_SERVING_SIZE))
+                cal = cursor.getInt(cursor.getColumnIndex(KEY_CALORIES))
+                time = cursor.getString(cursor.getColumnIndex(KEY_TIME))
+                ins = cursor.getString(cursor.getColumnIndex(KEY_INSTRUCTIONS))
                 val emp = RecipeModel(recName = name, recIsland = island, recServeSize = serve, recCalories = cal, recTime = time, recInstructions = ins)
                 empList.add(emp)
             } while (cursor.moveToNext())
@@ -224,7 +224,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         contentValues = ContentValues()
         contentValues.put(KEY_RNAME, "Kare Kare")
-        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_ISLAND, "Visayas")
         contentValues.put(KEY_SERVING_SIZE, "6 persons")
         contentValues.put(KEY_CALORIES, 934)
         contentValues.put(KEY_TIME, "2 hours, 40 minutes")
@@ -258,7 +258,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         contentValues = ContentValues()
         contentValues.put(KEY_RNAME, "Bulalo")
-        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_ISLAND, "Mindanao")
         contentValues.put(KEY_SERVING_SIZE, "4 persons")
         contentValues.put(KEY_CALORIES, 231)
         contentValues.put(KEY_TIME, "2 hours")

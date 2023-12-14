@@ -30,7 +30,6 @@ class Login : AppCompatActivity() {
                 val intent = Intent(this, Welcome::class.java)
                 intent.putExtra("fname",e.userFirstName)
                 intent.putExtra("lname",e.userLastName)
-                intent.putExtra("email",e.userEmail)
                 startActivity(intent)
                 return
             }
