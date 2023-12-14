@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    app:cardBackgroundColor="#EACBAA"
+    app:cardBackgroundColor="@color/light_brown"
     app:cardCornerRadius="8dp"
     app:cardElevation="6dp">
 
@@ -27,8 +27,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="15dp"
             android:text="Item"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        
 
 
     </LinearLayout>
