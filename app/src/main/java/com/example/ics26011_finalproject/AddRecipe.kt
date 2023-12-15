@@ -24,13 +24,14 @@ class AddRecipe : AppCompatActivity() {
         val recDescription = findViewById<EditText>(R.id.tvDescription)
 
         saveRecipe.setOnClickListener {
-            val name = recName.toString()
-            val ingred = recIngredients.toString()
-            val size = recServingSize.toString()
-            val cal = recCalories.toString()
-            val time = recTime.toString()
-            val ins = recInstructions.toString()
-            val desc = recDescription.toString()
+
+            val name = recName.text.toString()
+            val ingred = recIngredients.text.toString()
+            val size = recServingSize.text.toString()
+            val cal = recCalories.text.toString()
+            val time = recTime.text.toString()
+            val ins = recInstructions.text.toString()
+            val desc = recDescription.text.toString()
 
             val databaseHandler: DatabaseHandler = DatabaseHandler(this)
             val status =  databaseHandler.addRecipe(UserRecipeModel(name,ingred,size,cal,time,
@@ -50,4 +51,6 @@ class AddRecipe : AppCompatActivity() {
             }
         }
     }
+
+
 }

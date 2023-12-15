@@ -102,6 +102,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_USER)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS)
+        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_RECIPE)
         onCreate(db)
     }
 
@@ -181,6 +182,49 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return success
     }
 
+    //get user recipes from user recipe table
+    @SuppressLint("Range")
+    fun getUserRecipes():List<UserRecipeModel>{
+        val empList:ArrayList<UserRecipeModel> = ArrayList<UserRecipeModel>()
+        val selectQuery = "SELECT * FROM $TABLE_USER_RECIPE"
+        val db = this.readableDatabase
+        var cursor:Cursor? = null
+
+        try{
+            cursor = db.rawQuery(selectQuery,null)
+        }
+        catch(e: SQLiteException){
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+
+        var name: String
+        var ingred: String
+        var serve: String
+        var cal: String
+        var time: String
+        var ins: String
+        var desc: String
+
+        if(cursor.moveToFirst()){
+            do{//assign values from first row
+                name = cursor.getString(cursor.getColumnIndex(KEY_URNAME))
+                ingred = cursor.getString(cursor.getColumnIndex(KEY_URINGREDIENTS))
+                serve = cursor.getString(cursor.getColumnIndex(KEY_URSERVESIZE))
+                cal = cursor.getString(cursor.getColumnIndex(KEY_URCALORIES))
+                time = cursor.getString(cursor.getColumnIndex(KEY_URTIME))
+                ins = cursor.getString(cursor.getColumnIndex(KEY_URINSTRUCTIONS))
+                desc = cursor.getString(cursor.getColumnIndex(KEY_URDESCRIPTION))
+                val emp = UserRecipeModel(urName = name, urIngredients = ingred, urServing = serve, urCalories = cal, urTime = time, urInstructions = ins, urDescription = desc)
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+
+        db.close()
+
+        return empList
+    }
 
     //get recipes from recipe table
     @SuppressLint("Range")
