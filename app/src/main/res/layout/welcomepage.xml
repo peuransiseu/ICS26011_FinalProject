@@ -9,33 +9,6 @@
     tools:context=".Welcome"
     tools:openDrawer="start">
 
-<!--        <RelativeLayout-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="#EBE9E5">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/hamburgerBtn"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/hamburger_icon"-->
-<!--                android:clickable="true"-->
-<!--                android:background="#EBE9E5"-->
-<!--                android:padding="15dp"-->
-<!--                android:layout_centerVertical="true"/>-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Pamana Plates"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:gravity="center"-->
-<!--                android:fontFamily="@font/annie_use_your_telescope"-->
-<!--                android:textSize="24sp"-->
-<!--                android:textStyle="bold"/>-->
-<!--        </RelativeLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
