@@ -11,18 +11,20 @@ class Mindanao : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mindanaopage)
 
-
+        val island = "Mindanao"
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-        val emp: List<RecipeModel> = databaseHandler.getRecipes("Mindanao")
-        val rmRecName = Array<String>(emp.size){"null"}
+        val rm: List<RecipeModel> = databaseHandler.getRecipes(island)
+        val rmRecId = Array<String>(rm.size){"0"}
+        val rmRecName = Array<String>(rm.size){"null"}
         var index = 0
-        for(e in emp){
+        for(e in rm){
+            rmRecId[index] = e.recId.toString()
             rmRecName[index] = e.recName
             index++
 
         }
         val listview = findViewById<ListView>(R.id.mindanaoList)
-        val myListAdapter = MyListAdapter(this, rmRecName)
+        val myListAdapter = MyListAdapter(this, rmRecName, rmRecId,island.toLowerCase())
         listview.adapter = myListAdapter
 
         val back = findViewById<ImageView>(R.id.backBtn3)

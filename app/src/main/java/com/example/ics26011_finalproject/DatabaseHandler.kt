@@ -155,6 +155,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             return ArrayList()
         }
 
+        var id: Int
         var name: String
         var island: String
         var serve: String
@@ -164,13 +165,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         if(cursor.moveToFirst()){
             do{//assign values from first row
+                id = cursor.getInt(cursor.getColumnIndex(KEY_RID))
                 name = cursor.getString(cursor.getColumnIndex(KEY_RNAME))
                 island = cursor.getString(cursor.getColumnIndex(KEY_ISLAND))
                 serve = cursor.getString(cursor.getColumnIndex(KEY_SERVING_SIZE))
                 cal = cursor.getInt(cursor.getColumnIndex(KEY_CALORIES))
                 time = cursor.getString(cursor.getColumnIndex(KEY_TIME))
                 ins = cursor.getString(cursor.getColumnIndex(KEY_INSTRUCTIONS))
-                val emp = RecipeModel(recName = name, recIsland = island, recServeSize = serve, recCalories = cal, recTime = time, recInstructions = ins)
+                val emp = RecipeModel(recId = id, recName = name, recIsland = island, recServeSize = serve, recCalories = cal, recTime = time, recInstructions = ins)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }

@@ -14,30 +14,30 @@
             android:id="@+id/backBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_back"
+            android:layout_centerVertical="true"
             android:clickable="true"
             android:padding="15dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/arrow_back" />
 
         <ImageButton
             android:id="@+id/like_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/liked_icon"
-            android:background="#EBE9E5"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="70dp"
-            android:layout_alignParentRight="true"/>
+            android:background="#EBE9E5"
+            android:src="@drawable/liked_icon" />
 
         <ImageButton
             android:id="@+id/basket_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/basket_icon"
-            android:background="#EBE9E5"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="25dp"
-            android:layout_alignParentRight="true"/>
+            android:background="#EBE9E5"
+            android:src="@drawable/basket_icon" />
     </RelativeLayout>
 
     <LinearLayout
@@ -61,19 +61,20 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a Recipe"
-            android:fontFamily="@font/passion_one"
             android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/light_brown"
+            android:fontFamily="@font/passion_one"
+            android:text="Add a Recipe"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/light_brown"/>
+            android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:dividerHeight="10.0sp"
             tools:itemCount="5"
-            tools:listitem="@layout/recyclerview_layout" />
+            tools:listitem="@layout/listview_layout" />
 
 
     </LinearLayout>
