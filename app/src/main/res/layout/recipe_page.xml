@@ -10,7 +10,7 @@
         android:layout_height="?actionBarSize">
 
         <ImageView
-            android:id="@+id/backBtn2"
+            android:id="@+id/recipeBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_back"
@@ -55,6 +55,7 @@
             android:textSize="26sp"
             android:textStyle="bold"/>
         <ImageView
+            android:id="@+id/tvRecipeImage"
             android:layout_width="350dp"
             android:layout_height="200dp"
             android:src="@drawable/sisigpic"

@@ -24,6 +24,7 @@ class Luzon : AppCompatActivity() {
         val rmRecId = Array<String>(rm.size){"0"}
         val rmRecName = Array<String>(rm.size){"null"}
         var index = 0
+
         for(e in rm){
             rmRecId[index] = e.recId.toString()
             rmRecName[index] = e.recName
@@ -44,6 +45,8 @@ class Luzon : AppCompatActivity() {
 //            val element = myListAdapter.getItem(id) // The item that was clicked
 //            Toast.makeText(this, "Clicked: $element", Toast.LENGTH_SHORT).show()
         }
+
+
 
 //        val listView = findLayoutById(R.layout.listview_layout)
 //        val openRecipe = listView.findViewById<LinearLayout>(R.id.foodClick)

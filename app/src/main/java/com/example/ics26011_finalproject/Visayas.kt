@@ -27,7 +27,7 @@ class Visayas : AppCompatActivity() {
         val myListAdapter = MyListAdapter(this, rmRecName, rmRecId,island.toLowerCase())
         listview.adapter = myListAdapter
 
-        val back = findViewById<ImageView>(R.id.backBtn2)
+        val back = findViewById<ImageView>(R.id.recipeBackBtn)
         back.setOnClickListener {
             this.finish()
         }

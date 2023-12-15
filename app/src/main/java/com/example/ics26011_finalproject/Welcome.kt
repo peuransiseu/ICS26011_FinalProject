@@ -47,7 +47,12 @@ class Welcome : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Clicked Profile", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_liked_recipes -> {
-                    Toast.makeText(applicationContext, "Clicked Liked Recipes", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Thank You for Liking!", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_own_recipes -> {
+                    val i = Intent(this, UserRecipe::class.java)
+                    startActivity(i)
+                    Toast.makeText(applicationContext, "Clicked Own Recipes", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_share -> {
                     Toast.makeText(applicationContext, "Thank you for sharing!!", Toast.LENGTH_SHORT).show()
