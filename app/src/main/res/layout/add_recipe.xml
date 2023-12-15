@@ -12,7 +12,7 @@
         android:layout_height="?actionBarSize">
 
         <ImageView
-            android:id="@+id/backBtn3"
+            android:id="@+id/ownRecipeBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_back"
@@ -154,26 +154,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:background="@drawable/edit_text_bg">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Description" />
-
-            <EditText
-                android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="This recipe was from my beloved mother." />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

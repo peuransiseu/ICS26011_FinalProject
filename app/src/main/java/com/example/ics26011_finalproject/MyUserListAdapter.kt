@@ -22,8 +22,11 @@ class MyUserListAdapter(private val context: Activity, private val recipeName: A
 
         nameText.text = recipeName[position]
 
-
-
+        foodClick.setOnClickListener{
+            val intent = Intent(context, UserRecipeContent::class.java)
+            intent.putExtra("recipeName", recipeName[position])
+            context.startActivity(intent)
+        }
 
         return rowView
 

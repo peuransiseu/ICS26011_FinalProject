@@ -1,14 +1,8 @@
 package com.example.ics26011_finalproject
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ListView
-import android.widget.SearchView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.montesmp5.DatabaseHandler
@@ -25,12 +19,14 @@ class Luzon : AppCompatActivity() {
         val rmRecName = Array<String>(rm.size){"null"}
         var index = 0
 
+
+
         for(e in rm){
             rmRecId[index] = e.recId.toString()
             rmRecName[index] = e.recName
             index++
-
         }
+
         val listview = findViewById<ListView>(R.id.luzonList)
         val myListAdapter = MyListAdapter(this, rmRecName, rmRecId,island.toLowerCase())
         listview.adapter = myListAdapter

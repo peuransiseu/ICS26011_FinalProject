@@ -22,8 +22,8 @@ class MyListAdapter(private val context: Activity, private val recipeName: Array
 
 
         foodClick.setOnClickListener{
-            val intent = Intent(context, Welcome::class.java)
-            intent.putExtra("recipeName", recipeName)
+            val intent = Intent(context, RecipeContent::class.java)
+            intent.putExtra("recipeName", recipeName[position])
             context.startActivity(intent)
         }
 

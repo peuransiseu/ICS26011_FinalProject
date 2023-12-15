@@ -1,5 +1,6 @@
 package com.example.ics26011_finalproject
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -7,6 +8,7 @@ import android.widget.ListView
 import com.example.montesmp5.DatabaseHandler
 
 class Mindanao : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mindanaopage)
@@ -27,7 +29,7 @@ class Mindanao : AppCompatActivity() {
         val myListAdapter = MyListAdapter(this, rmRecName, rmRecId,island.toLowerCase())
         listview.adapter = myListAdapter
 
-        val back = findViewById<ImageView>(R.id.backBtn3)
+        val back = findViewById<ImageView>(R.id.mindanaoBackBtn)
         back.setOnClickListener {
             this.finish()
         }

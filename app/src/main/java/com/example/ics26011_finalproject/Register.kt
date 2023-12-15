@@ -5,14 +5,12 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.montesmp5.DatabaseHandler
 import com.example.montesmp5.EmpModelClass
-import org.w3c.dom.Text
 
 class Register : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

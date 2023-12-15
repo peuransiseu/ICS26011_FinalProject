@@ -5,6 +5,5 @@ class UserRecipeModel(var urName:String,
                   val urServing:String,
                   val urCalories: String,
                   val urTime:String,
-                  val urInstructions:String,
-                  val urDescription:String)
+                  val urInstructions:String)
 {}

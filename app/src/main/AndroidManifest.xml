@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ICS26011_FinalProject"
         tools:targetApi="31">
         <activity
+            android:name=".UserRecipeContent"
+            android:exported="false" />
+        <activity
             android:name=".AddRecipe"
             android:exported="false" />
         <activity
@@ -45,7 +48,9 @@
         <activity
             android:name=".Mindanao"
             android:exported="false" />
-
+        <activity
+            android:name=".RecipeContent"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

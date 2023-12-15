@@ -1,13 +1,16 @@
 package com.example.ics26011_finalproject
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListView
 import com.example.montesmp5.DatabaseHandler
 
 class UserRecipe : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_recipes)
@@ -17,6 +20,11 @@ class UserRecipe : AppCompatActivity() {
         addRecipe.setOnClickListener {
             val intent = Intent(this, AddRecipe::class.java)
             startActivity(intent)
+        }
+
+        val back = findViewById<ImageView>(R.id.recipeBackBtn)
+        back.setOnClickListener {
+            this.finish()
         }
 
     }

@@ -88,6 +88,12 @@ class Welcome : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val userName = findViewById<TextView>(R.id.tvName)
+        userName.text = intent.getStringExtra("fname").toString()+" "+intent.getStringExtra("lname").toString()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)){
             return true
