@@ -53,8 +53,7 @@ class Register : AppCompatActivity() {
                     val status =  databaseHandler.addUser(EmpModelClass(email,fname,lname,user,pass))
                     if(status > -1){
                         Toast.makeText(this,"Record Saved", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        this.finish()
                     }
                 }
 
