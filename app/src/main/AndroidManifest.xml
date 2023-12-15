@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ICS26011_FinalProject"
         tools:targetApi="31">
         <activity
+            android:name=".Recipe"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,23 +24,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login"
-            android:exported="true"/>
+        <activity
+            android:name=".Login"
+            android:exported="true" />
+        <activity
+            android:name=".Welcome"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".Luzon"
+            android:exported="false" />
+        <activity
+            android:name=".Visayas"
+            android:exported="false" />
+        <activity
+            android:name=".Mindanao"
+            android:exported="false" />
 
-        <activity android:name=".Welcome"
-            android:exported="false"/>
-
-        <activity android:name=".Register"
-            android:exported="false"/>
-
-        <activity android:name=".Luzon"
-            android:exported="false"/>
-
-        <activity android:name=".Visayas"
-            android:exported="false"/>
-
-        <activity android:name=".Mindanao"
-            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

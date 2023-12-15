@@ -54,12 +54,19 @@
             android:fontFamily="@font/annie_use_your_telescope"
             android:textSize="26sp"
             android:textStyle="bold"/>
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:src="@drawable/sisigpic"
+            android:layout_gravity="center"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +125,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/description_text"
+            android:id="@+id/tv_description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -135,7 +142,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/ingredients_text"
+            android:id="@+id/tv_ingredients_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -152,7 +159,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/instructions_text"
+            android:id="@+id/tv_instructions_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10" />

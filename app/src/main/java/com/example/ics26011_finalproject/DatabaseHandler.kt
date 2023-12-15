@@ -9,6 +9,7 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.ics26011_finalproject.RecipeModel
 import java.io.BufferedReader
 import java.io.FileReader
 
@@ -140,9 +141,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
 
     @SuppressLint("Range")
-    fun getRecipes():List<EmpModelClass>{
-        val empList:ArrayList<EmpModelClass> = ArrayList<EmpModelClass>()
-        val selectQuery = "SELECT * FROM $TABLE_USER"
+    fun getRecipes(isla:String):List<RecipeModel>{
+        val empList:ArrayList<RecipeModel> = ArrayList<RecipeModel>()
+        val selectQuery = "SELECT * FROM $TABLE_RECIPE WHERE $KEY_ISLAND = \"$isla\""
         val db = this.readableDatabase
         var cursor:Cursor? = null
 
@@ -154,20 +155,24 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             return ArrayList()
         }
 
-        var uEmail: String
-        var uFirstName: String
-        var uLastName: String
-        var uUser: String
-        var uPass: String
+        var id: Int
+        var name: String
+        var island: String
+        var serve: String
+        var cal: Int
+        var time: String
+        var ins: String
 
         if(cursor.moveToFirst()){
             do{//assign values from first row
-                uEmail = cursor.getString(cursor.getColumnIndex(KEY_EMAIL))
-                uFirstName = cursor.getString(cursor.getColumnIndex(KEY_FNAME))
-                uLastName = cursor.getString(cursor.getColumnIndex(KEY_LNAME))
-                uUser = cursor.getString(cursor.getColumnIndex(KEY_USER))
-                uPass = cursor.getString(cursor.getColumnIndex(KEY_PASS))
-                val emp = EmpModelClass(userEmail = uEmail, userFirstName = uFirstName, userLastName = uLastName, userUser = uUser, userPass = uPass)
+                id = cursor.getInt(cursor.getColumnIndex(KEY_RID))
+                name = cursor.getString(cursor.getColumnIndex(KEY_RNAME))
+                island = cursor.getString(cursor.getColumnIndex(KEY_ISLAND))
+                serve = cursor.getString(cursor.getColumnIndex(KEY_SERVING_SIZE))
+                cal = cursor.getInt(cursor.getColumnIndex(KEY_CALORIES))
+                time = cursor.getString(cursor.getColumnIndex(KEY_TIME))
+                ins = cursor.getString(cursor.getColumnIndex(KEY_INSTRUCTIONS))
+                val emp = RecipeModel(recId = id, recName = name, recIsland = island, recServeSize = serve, recCalories = cal, recTime = time, recInstructions = ins)
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
@@ -221,7 +226,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         contentValues = ContentValues()
         contentValues.put(KEY_RNAME, "Kare Kare")
-        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_ISLAND, "Visayas")
         contentValues.put(KEY_SERVING_SIZE, "6 persons")
         contentValues.put(KEY_CALORIES, 934)
         contentValues.put(KEY_TIME, "2 hours, 40 minutes")
@@ -255,7 +260,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         contentValues = ContentValues()
         contentValues.put(KEY_RNAME, "Bulalo")
-        contentValues.put(KEY_ISLAND, "Luzon")
+        contentValues.put(KEY_ISLAND, "Mindanao")
         contentValues.put(KEY_SERVING_SIZE, "4 persons")
         contentValues.put(KEY_CALORIES, 231)
         contentValues.put(KEY_TIME, "2 hours")
