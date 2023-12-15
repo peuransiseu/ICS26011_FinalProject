@@ -7,33 +7,18 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Welcome">
-<!--    tools:openDrawer="start"-->>
+<!--    tools:openDrawer="start">-->
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_gravity="start"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        app:headerLayout="@layout/header_menu"
-        app:menu="@menu/main_menu" />
-
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:paddingStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#EBE9E5"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/hamburger_icon"
-        />
+        layout="@layout/toolbar"/>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/mainbg"
-        android:layout_marginTop="50dp"
         android:paddingStart="40dp"
         android:paddingEnd="40dp">
 
@@ -203,5 +188,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_gravity="start"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        app:headerLayout="@layout/header_menu"
+        app:menu="@menu/main_menu"
+        android:fitsSystemWindows="true"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
