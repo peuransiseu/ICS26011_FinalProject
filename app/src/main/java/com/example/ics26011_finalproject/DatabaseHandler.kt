@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.ics26011_finalproject.RecipeModel
+import com.example.ics26011_finalproject.UserRecipeModel
 import java.io.BufferedReader
 import java.io.FileReader
 
@@ -42,6 +43,16 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private val KEY_INAME = "iname"
         private val KEY_IMEASURE = "imeasure"
 
+        private val TABLE_USER_RECIPE = "UserRecipeTable"
+        private val KEY_URID = "urId"
+        private val KEY_URNAME = "urname"
+        private val KEY_URINGREDIENTS = "ingredients"
+        private val KEY_URSERVESIZE = "servingsize"
+        private val KEY_URCALORIES = "calories"
+        private val KEY_URTIME = "time"
+        private val KEY_URINSTRUCTIONS = "instructions"
+        private val KEY_URDESCRIPTION = "description"
+
     }
 
 
@@ -69,10 +80,21 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 + KEY_IMEASURE + " TEXT NOT NULL,"
                 + " FOREIGN KEY ($KEY_IID) REFERENCES $TABLE_RECIPE($KEY_RID));")
 
+        val CREATE_USER_RECIPE_TABLE = ("CREATE TABLE " + TABLE_USER_RECIPE + "("
+                + KEY_URID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_URNAME + " TEXT NOT NULL,"
+                + KEY_URINGREDIENTS + " TEXT NOT NULL,"
+                + KEY_URSERVESIZE + " TEXT NOT NULL,"
+                + KEY_URCALORIES  + " TEXT NOT NULL,"
+                + KEY_URTIME  + " TEXT NOT NULL,"
+                + KEY_URINSTRUCTIONS + " TEXT NOT NULL,"
+                + KEY_URDESCRIPTION + " TEXT NOT NULL);")
+
 
         db?.execSQL(CREATE_USER_TABLE)
         db?.execSQL(CREATE_RECIPE_TABLE)
         db?.execSQL(CREATE_INGREDIENT_TABLE)
+        db?.execSQL(CREATE_USER_RECIPE_TABLE)
 
     }
 
@@ -80,9 +102,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_USER)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS)
+        db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_RECIPE)
         onCreate(db)
     }
 
+    //add user to user table
     fun addUser(emp: EmpModelClass): Long{
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -99,7 +123,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return success
     }
 
-
+    //get user from user table
    @SuppressLint("Range")
     fun getUser():List<EmpModelClass>{
         val empList:ArrayList<EmpModelClass> = ArrayList<EmpModelClass>()
@@ -138,8 +162,71 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         return empList
     }
 
+    //add recipe to user recipe table
+    fun addRecipe(urm : UserRecipeModel):Long{
+        val db = this.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(KEY_URNAME, urm.urName)
+        contentValues.put(KEY_URINGREDIENTS, urm.urIngredients)
+        contentValues.put(KEY_URSERVESIZE, urm.urServing)
+        contentValues.put(KEY_URCALORIES, urm.urCalories)
+        contentValues.put(KEY_TIME, urm.urTime)
+        contentValues.put(KEY_URINSTRUCTIONS, urm.urInstructions)
+        contentValues.put(KEY_URDESCRIPTION, urm.urDescription)
+
+        val success = db.insert(TABLE_USER_RECIPE,null,contentValues)
+
+        db.close()
+
+        return success
+    }
+
+    //get user recipes from user recipe table
+    @SuppressLint("Range")
+    fun getUserRecipes():List<UserRecipeModel>{
+        val empList:ArrayList<UserRecipeModel> = ArrayList<UserRecipeModel>()
+        val selectQuery = "SELECT * FROM $TABLE_USER_RECIPE"
+        val db = this.readableDatabase
+        var cursor:Cursor? = null
+
+        try{
+            cursor = db.rawQuery(selectQuery,null)
+        }
+        catch(e: SQLiteException){
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
 
 
+        var name: String
+        var ingred: String
+        var serve: String
+        var cal: String
+        var time: String
+        var ins: String
+        var desc: String
+
+        if(cursor.moveToFirst()){
+            do{//assign values from first row
+                name = cursor.getString(cursor.getColumnIndex(KEY_URNAME))
+                ingred = cursor.getString(cursor.getColumnIndex(KEY_URINGREDIENTS))
+                serve = cursor.getString(cursor.getColumnIndex(KEY_URSERVESIZE))
+                cal = cursor.getString(cursor.getColumnIndex(KEY_URCALORIES))
+                time = cursor.getString(cursor.getColumnIndex(KEY_URTIME))
+                ins = cursor.getString(cursor.getColumnIndex(KEY_URINSTRUCTIONS))
+                desc = cursor.getString(cursor.getColumnIndex(KEY_URDESCRIPTION))
+                val emp = UserRecipeModel(urName = name, urIngredients = ingred, urServing = serve, urCalories = cal, urTime = time, urInstructions = ins, urDescription = desc)
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+
+        db.close()
+
+        return empList
+    }
+
+    //get recipes from recipe table
     @SuppressLint("Range")
     fun getRecipes(isla:String):List<RecipeModel>{
         val empList:ArrayList<RecipeModel> = ArrayList<RecipeModel>()
