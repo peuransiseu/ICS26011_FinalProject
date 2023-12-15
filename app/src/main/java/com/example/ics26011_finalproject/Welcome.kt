@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -18,7 +19,6 @@ import com.google.android.material.navigation.NavigationView
 class Welcome : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +29,12 @@ class Welcome : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-
         val userName = findViewById<TextView>(R.id.tvName)
         val luzon = findViewById<RelativeLayout>(R.id.luzonCard)
         val visayas = findViewById<RelativeLayout>(R.id.visayasCard)
         val mindanao = findViewById<RelativeLayout>(R.id.mindanaoCard)
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState();
 
@@ -83,6 +82,7 @@ class Welcome : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)){
             return true
