@@ -1,16 +1,21 @@
 package com.example.ics26011_finalproject
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.montesmp5.DatabaseHandler
 import com.example.montesmp5.EmpModelClass
+import org.w3c.dom.Text
 
 class Register : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registerpage)
@@ -21,6 +26,12 @@ class Register : AppCompatActivity() {
         val u_user = findViewById<EditText>(R.id.registerUname)
         val u_pass = findViewById<EditText>(R.id.registerPword)
         val register = findViewById<Button>(R.id.registerBtn)
+        val loginHere = findViewById<TextView>(R.id.loginHere1)
+
+        loginHere.setOnClickListener {
+            val i = Intent(this, Login::class.java)
+            startActivity(i)
+        }
 
         register.setOnClickListener {
             val email = u_email.text.toString()
@@ -53,8 +64,7 @@ class Register : AppCompatActivity() {
                     val status =  databaseHandler.addUser(EmpModelClass(email,fname,lname,user,pass))
                     if(status > -1){
                         Toast.makeText(this,"Record Saved", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        this.finish()
                     }
                 }
 
