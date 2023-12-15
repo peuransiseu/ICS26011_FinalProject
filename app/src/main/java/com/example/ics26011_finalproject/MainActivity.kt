@@ -15,16 +15,9 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-
-    var navigationView: NavigationView? = null
-    var toolbar: Toolbar? = null
-    var menu: Menu? = null
-    var textView: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.drawer_layout)
+        setContentView(R.layout.homepagesplash)
         val dbh = DatabaseHandler(this)
         dbh.loadRecipes()
 
@@ -41,10 +34,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.nav_view)
-        textView = findViewById(R.id.textView)
-        toolbar = findViewById(R.id.toolbar)
 
     }
 
